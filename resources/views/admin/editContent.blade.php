@@ -50,14 +50,14 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action={{route('contentUpdate', ['id'=> $data->id])}}>
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post"  enctype="multipart/form-data" action={{route('contentUpdate', ['id'=> $data->id])}} >
                                 @CSRF
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Main Menu <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" name="menu_id">
                                             @foreach($menus as $menu)
-                                                <option value={{$menu->id}} {{($menu->id) == $data->menu_id ? "selected" : ""}}>{{$menu->title}}</option>
+                                                <option value={{$menu->id}} {{($menu->id) == $data->menu_id ? "selected" : ""}}>{{\App\Http\Controllers\admin\MenuController::getParentsTree($menu, $menu->title)}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -66,35 +66,38 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Title <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="title" value={{$data->title}}>
+                                        <input type="text" id="first-name"  class="form-control " name="title" value="{{$data->title}}">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Keywords <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="keywords" value={{$data->keywords}}>
+                                        <input type="text" id="first-name"  class="form-control " name="keywords" value="{{$data->keywords}}">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">description <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="description" value={{$data->description}}>
+                                        <input type="text" id="first-name"  class="form-control " name="description" value="{{$data->description}}">
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Image <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="image" value={{$data->image}}>
+                                        <input type="file" id="image" class="form-control " name="image">
+                                        @if ($data->image)
+                                            <img src="{{Storage::url($data->image)}}" alt="" height="60" width="60">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Type <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="type" value={{$data->type}}>
+                                        <input type="text" id="first-name" class="form-control " name="type" value="{{$data->type}}">
                                     </div>
                                 </div>
                                 <div class="item form-group">

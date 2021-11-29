@@ -21,8 +21,20 @@ Route::get('/home', function () {
     return view('home.index');
 });
 
-//route to root  with controller
+//route to index page
 Route::get('/', [HomeController::class, 'index'])->name("root");
+Route::get('/contact', [HomeController::class, 'contact'])->name("contact");
+Route::get('/faq', [HomeController::class, 'faq'])->name("faq");
+Route::get('/references', [HomeController::class, 'references'])->name("references");
+Route::get('/about', [HomeController::class, 'about'])->name("about");
+Route::get('/logout', [HomeController::class, 'logout'])->name("logout");
+Route::middleware('auth')->group(function() {
+    Route::get('/profile', [HomeController::class, 'profile'])->name("profile");
+});
+
+
+
+
 
 
 // route to admin logIn
@@ -58,6 +70,19 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::get('delete/{id}', [\App\Http\Controllers\admin\ContentController::class, 'destroy'])->name("contentDelete");
         Route::get('show', [\App\Http\Controllers\admin\ContentController::class, 'show'])->name("contentShow");
     });
+
+    // admin/image
+    Route::prefix('image')->group(function () {
+        Route::get('add/{contentId}', [\App\Http\Controllers\admin\ImageController::class, 'add'])->name("imageAdd");
+        Route::post('store/{contentId}', [\App\Http\Controllers\admin\ImageController::class, 'store'])->name("imageStore");
+        Route::get('delete/{imageId}/{contentId}', [\App\Http\Controllers\admin\ImageController::class, 'destroy'])->name("imageDelete");
+        Route::get('show', [\App\Http\Controllers\admin\ImageController::class, 'show'])->name("imageShow");
+    });
+
+    // admin/setting
+    Route::get('setting', [\App\Http\Controllers\admin\SettingController::class, 'edit'])->name("settingEdit");
+    // admin/setting/update
+    Route::post('setting/update/{id}', [\App\Http\Controllers\admin\SettingController::class, 'update'])->name("settingUpdate");
 
 
 });

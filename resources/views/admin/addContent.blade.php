@@ -50,56 +50,56 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action={{route('contentStore')}}>
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" action={{route('contentStore')}} >
                                 @CSRF
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Menu <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" name="menu_id">
                                             @foreach($menus as $menu)
-                                                <option value={{$menu->id}}>{{$menu->title}}</option>
+                                                <option value={{$menu->id}}>{{\App\Http\Controllers\admin\MenuController::getParentsTree($menu, $menu->title)}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Title <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Title <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="title">
+                                        <input type="text" id="title"  class="form-control " name="title">
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Keywords <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="keywords">Keywords <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="keywords">
+                                        <input type="text" id="keywords"  class="form-control " name="keywords">
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">description <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="description">description <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="description">
+                                        <input type="text" id="description"  class="form-control " name="description">
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Image <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="image">
+                                        <input type="file" id="image"  class="form-control " name="image">
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Type <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="type">Type <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="type">
+                                        <input type="text" id="type"  class="form-control " name="type">
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Detail <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="detail">Detail <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <textarea id="summernote" name="detail"></textarea>
@@ -139,3 +139,5 @@
         </div>
     </div>
 @endsection
+
+

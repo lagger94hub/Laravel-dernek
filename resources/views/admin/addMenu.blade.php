@@ -47,7 +47,7 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" name="parent_id">
                                             @foreach($parentMenus as $parent)
-                                                <option value={{$parent->id}}>{{$parent->title}}</option>
+                                                <option value={{$parent->id}}>{{\App\Http\Controllers\admin\MenuController::getParentsTree($parent, $parent->title)}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -56,21 +56,21 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Title <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="title">
+                                        <input type="text" id="first-name"  class="form-control " name="title">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Keywords <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="keywords">
+                                        <input type="text" id="first-name"  class="form-control " name="keywords">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">description <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="first-name" required="required" class="form-control " name="description">
+                                        <input type="text" id="first-name"  class="form-control " name="description">
                                     </div>
                                 </div>
                                 <div class="item form-group">

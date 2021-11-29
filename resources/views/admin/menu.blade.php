@@ -56,13 +56,15 @@
                                         @foreach($menuData as $item)
                                         <tr>
                                             <td>{{$item->id}}</td>
-                                            <td>{{$item->parent_id}}</td>
+                                            <td>
+                                                {{\App\Http\Controllers\admin\MenuController::getParentsTree($item, $item->title)}}
+                                            </td>
                                             <td>{{$item->title}}</td>
                                             <td>{{$item->keywords}}</td>
                                             <td>{{$item->description}}</td>
                                             <td>{{$item->status}}</td>
-                                            <td><a href={{route('menuEdit', ['id'=>$item->id])}}>Edit</a></td>
-                                            <td><a onclick="return confirm('Are you sure you want to delete ?')" href={{route('menuDelete', ['id' => $item->id])}}>Delete</a></td>
+                                            <td><a href={{route('menuEdit', ['id'=>$item->id])}}><i class="fas fa-edit"></i></a></td>
+                                            <td><a onclick="return confirm('Are you sure you want to delete ?')" href={{route('menuDelete', ['id' => $item->id])}}><i class="fas fa-trash-alt"></i></a></td>
                                         </tr>
                                         @endforeach
 

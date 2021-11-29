@@ -14,9 +14,23 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $appends = [
+      'getParentsTree',
+    ];
+
+    public static  function getParentsTree($menu, $title) {
+        if ($menu->parent_id == 0) {
+            return $title;
+        }
+        $parent = Menu::find($menu->parent_id);
+        $title = $parent->title. '>' . $title;
+
+        return MenuController::getParentsTree($parent, $title);
+    }
     public function index()
     {
-        $menuData = DB::select('select * from menus');
+        $menuData = Menu::with('children')->get();
         return view('admin.menu', ['menuData' => $menuData]);
     }
 
@@ -27,7 +41,7 @@ class MenuController extends Controller
      */
     public  function  add()
     {
-        $parentMenus = DB::select('select * from menus where parent_id = 0');
+        $parentMenus = Menu::with('children')->get();
         return view('admin.addMenu', ['parentMenus' => $parentMenus]);
     }
     public function create( Request $request)
@@ -75,7 +89,7 @@ class MenuController extends Controller
     public function edit(Menu $menu, $id)
     {
         $data = Menu::find($id);
-        $parentMenus = DB::select('select * from menus where parent_id = 0');
+        $parentMenus = Menu::with('children')->get();
         return view('admin.editMenu', ['data' => $data, 'parentMenus'=>$parentMenus]);
     }
 

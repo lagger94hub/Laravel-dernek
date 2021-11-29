@@ -1,104 +1,116 @@
-<footer class="ftco-footer ftco-bg-dark ftco-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-6 col-lg-3">
-                <div class="ftco-footer-widget mb-5">
-                    <h2 class="ftco-heading-2">Have a Questions?</h2>
-                    <div class="block-23 mb-3">
+<footer id="footer" class="footer bg-overlay">
+    <div class="footer-main">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-4 col-md-6 footer-widget footer-about">
+                    <h3 class="widget-title">About Us</h3>
+                    <img loading="lazy" width="200px" class="footer-logo"
+                         src="{{ asset('assets') }}/images/footer-logo.png" alt="Constra">
+                    <p>{{$setting->aboutus == null ? '': $setting->aboutus}}.</p>
+                    <div class="footer-social">
                         <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                            @if($setting->facebook != null)
+                                <li><a href="{{$setting->facebook}}" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>@endif
+
+
+                            @if($setting->twitter !=null)
+                                <li><a href="{{$setting->twitter}}" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                </li>@endif
+                            @if($setting->instagram)
+                                <li><a href="{{$setting->instagram}}" aria-label="Instagram"><i
+                                            class="fab fa-instagram"></i></a></li>@endif
+                            @if($setting->youtube)
+                                <li><a href="{{$setting->youtube}}" aria-label="Youtube"><i
+                                            class="fab fa-youtube"></i></a></li>@endif
+                        </ul>
+                    </div><!-- Footer social end -->
+                </div><!-- Col end -->
+
+                <div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0">
+                    <h3 class="widget-title">Working Hours</h3>
+                    <div class="working-hours">
+                        <p>{{$setting->company == null ? "": $setting->company}}</p>
+                        <p><span>Email: </span>{{$setting->email == null ? "": $setting->email}}</p>
+                        <p><span>Fax: </span>{{$setting->fax == null ? "": $setting->fax}}</p>
+                        <p><span>Phone: </span>{{$setting->phone == null ? "": $setting->phone}}</p>
+                        <p><span>Address: </span>{{$setting->address == null ? "": $setting->address}}</p>
+
+
+
+
+                    </div>
+                </div><!-- Col end -->
+
+                <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
+                    <h3 class="widget-title">Services</h3>
+                    <ul class="list-arrow">
+                        <li><a href="service-single.html">Pre-Construction</a></li>
+                        <li><a href="service-single.html">General Contracting</a></li>
+                        <li><a href="service-single.html">Construction Management</a></li>
+                        <li><a href="service-single.html">Design and Build</a></li>
+                        <li><a href="service-single.html">Self-Perform Construction</a></li>
+                    </ul>
+                </div><!-- Col end -->
+            </div><!-- Row end -->
+        </div><!-- Container end -->
+    </div><!-- Footer main end -->
+
+    <div class="copyright">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="copyright-info text-center text-md-left">
+              <span>Copyright &copy; <script>
+                  document.write(new Date().getFullYear())
+                </script>, Designed &amp; Developed by {{$setting->company}} </span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="footer-menu text-center text-md-right">
+                        <ul class="list-unstyled">
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="team.html">Our people</a></li>
+                            <li><a href="faq.html">Faq</a></li>
+                            <li><a href="news-left-sidebar.html">Blog</a></li>
+                            <li><a href="pricing.html">Pricing</a></li>
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="ftco-footer-widget mb-5">
-                    <h2 class="ftco-heading-2">Recent Blog</h2>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block-21 mb-5 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="ftco-footer-widget mb-5 ml-md-4">
-                    <h2 class="ftco-heading-2">Links</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Home</a></li>
-                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>About</a></li>
-                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Services</a></li>
-                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Deparments</a></li>
-                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="ftco-footer-widget mb-5">
-                    <h2 class="ftco-heading-2">Subscribe Us!</h2>
-                    <form action="#" class="subscribe-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control mb-2 text-center" placeholder="Enter email address">
-                            <input type="submit" value="Subscribe" class="form-control submit px-3">
-                        </div>
-                    </form>
-                </div>
-                <div class="ftco-footer-widget mb-5">
-                    <h2 class="ftco-heading-2 mb-0">Connect With Us</h2>
-                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
+            </div><!-- Row end -->
 
-                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+            <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top position-fixed">
+                <button class="btn btn-primary" title="Back to Top">
+                    <i class="fa fa-angle-double-up"></i>
+                </button>
             </div>
-        </div>
-    </div>
-</footer>
 
-<!-- loader -->
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+        </div><!-- Container end -->
+    </div><!-- Copyright end -->
+</footer><!-- Footer end -->
 
 
-<script src="{{ asset('assets') }}/js/jquery.min.js"></script>
-<script src="{{ asset('assets') }}/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="{{ asset('assets') }}/js/popper.min.js"></script>
-<script src="{{ asset('assets') }}/js/bootstrap.min.js"></script>
-<script src="{{ asset('assets') }}/js/jquery.easing.1.3.js"></script>
-<script src="{{ asset('assets') }}/js/jquery.waypoints.min.js"></script>
-<script src="{{ asset('assets') }}/js/jquery.stellar.min.js"></script>
-<script src="{{ asset('assets') }}/js/owl.carousel.min.js"></script>
-<script src="{{ asset('assets') }}/js/jquery.magnific-popup.min.js"></script>
-<script src="{{ asset('assets') }}/js/aos.js"></script>
-<script src="{{ asset('assets') }}/js/jquery.animateNumber.min.js"></script>
-<script src="{{ asset('assets') }}/js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="{{ asset('assets') }}/js/google-map.js"></script>
-<script src="{{ asset('assets') }}/js/main.js"></script>
+<!-- Javascript Files
+ ================================================== -->
+
+<!-- initialize jQuery Library -->
+<script src="{{ asset('assets') }}/plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap jQuery -->
+<script src="{{ asset('assets') }}/plugins/bootstrap/bootstrap.min.js" defer></script>
+<!-- Slick Carousel -->
+<script src="{{ asset('assets') }}/plugins/slick/slick.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/slick/slick-animation.min.js"></script>
+<!-- Color box -->
+<script src="{{ asset('assets') }}/plugins/colorbox/jquery.colorbox.js"></script>
+<!-- shuffle -->
+<script src="{{ asset('assets') }}/plugins/shuffle/shuffle.min.js" defer></script>
+
+
+<!-- Google Map API Key-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
+<!-- Google Map Plugin-->
+<script src="{{ asset('assets') }}/plugins/google-map/map.js" defer></script>
+
+<!-- Template custom -->
+<script src="{{ asset('assets') }}/js/script.js"></script>

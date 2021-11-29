@@ -34,7 +34,6 @@ class HomeController extends Controller
             return view('admin.logIn');
         }
     }
-
     public function logOut(Request $request)
     {
         Auth::logout();
@@ -43,6 +42,8 @@ class HomeController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/admin/login');
     }
+
+
 }

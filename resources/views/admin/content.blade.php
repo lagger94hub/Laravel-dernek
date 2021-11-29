@@ -46,6 +46,7 @@
                                             <th>Keywords</th>
                                             <th>Description</th>
                                             <th>image</th>
+                                            <th>Image Gallery</th>
                                             <th>type</th>
                                             <th>Status</th>
                                             <th>Edit</th>
@@ -58,15 +59,20 @@
                                         @foreach($contentData as $item)
                                         <tr>
                                             <td>{{$item->id}}</td>
-                                            <td>{{$item->menu_id}}</td>
+                                            <td>{{\App\Http\Controllers\admin\MenuController::getParentsTree($item->menu, $item->menu->title)}}</td>
                                             <td>{{$item->title}}</td>
                                             <td>{{$item->keywords}}</td>
                                             <td>{{$item->description}}</td>
-                                            <td>{{$item->image}}</td>
+                                            <td>
+                                                @if ($item->image)
+                                                    <img src="{{Storage::url($item->image)}}" alt="" height="150" width="150">
+                                                @endif
+                                            </td>
+                                            <td><a href="{{route("imageAdd", ['contentId'=>$item->id])}}" onclick="return !window.open(this.href,'','top=50 left=100 width=1000,height=900')"><i class="far fa-images"></i> Add to Gallery</a></td>
                                             <td>{{$item->type}}</td>
                                             <td>{{$item->status}}</td>
-                                            <td><a href={{route('contentEdit', ['id'=>$item->id])}}>Edit</a></td>
-                                            <td><a onclick="return confirm('Are you sure you want to delete ?')" href={{route('contentDelete', ['id' => $item->id])}}>Delete</a></td>
+                                            <td><a href={{route('contentEdit', ['id'=>$item->id])}}><i class="fas fa-edit"></i></a></td>
+                                            <td><a onclick="return confirm('Are you sure you want to delete ?')" href={{route('contentDelete', ['id' => $item->id])}}><i class="fas fa-trash-alt"></i></a></td>
                                         </tr>
                                         @endforeach
 

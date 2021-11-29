@@ -4,9 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
@@ -17,7 +19,8 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contentData = DB::select('select * from contents');
+//        $contentData = DB::select('select * from contents');
+        $contentData = Content::with('menu')->get();
         return view('admin.content', ['contentData' => $contentData]);
     }
 
@@ -28,30 +31,44 @@ class ContentController extends Controller
      */
     public function add()
     {
-        $menus = DB::select('select * from menus ');
+        $menus = Menu::with('children')->get();
         return view('admin.addContent', ['menus' => $menus]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        DB::table('contents')->insert([
-            'menu_id' => $request->input('menu_id'),
-            'title' => $request->input('title'),
-            'keywords' => $request->input('keywords'),
-            'description' => $request->input('description'),
-            'image' => $request->input('image'),
-            'status' => $request->input('status'),
-            'type' => $request->input('type'),
-            'detail' => $request->input('detail'),
-            'user_id' => Auth::id()
+        if ($request->file("image") == null) {
+            DB::table('contents')->insert([
+                'menu_id' => $request->input('menu_id'),
+                'title' => $request->input('title'),
+                'keywords' => $request->input('keywords'),
+                'description' => $request->input('description'),
+                'status' => $request->input('status'),
+                'type' => $request->input('type'),
+                'detail' => $request->input('detail'),
+                'user_id' => Auth::id()
+            ]);
+        } else {
+            DB::table('contents')->insert([
+                'menu_id' => $request->input('menu_id'),
+                'title' => $request->input('title'),
+                'keywords' => $request->input('keywords'),
+                'description' => $request->input('description'),
+                'image' => Storage::putFile('images', $request->file("image")),
+                'status' => $request->input('status'),
+                'type' => $request->input('type'),
+                'detail' => $request->input('detail'),
+                'user_id' => Auth::id()
 
-        ]);
+            ]);
+        }
+
 
         return redirect()->route('content');
     }
@@ -59,7 +76,7 @@ class ContentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -70,21 +87,21 @@ class ContentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Content $content, $id)
     {
         $data = Content::find($id);
-        $menus = DB::select('select * from menus');
-        return view('admin.editContent', ['data' => $data, 'menus'=>$menus]);
+        $menus = Menu::with('children')->get();
+        return view('admin.editContent', ['data' => $data, 'menus' => $menus]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -94,7 +111,9 @@ class ContentController extends Controller
         $data->title = $request->input('title');
         $data->keywords = $request->input('keywords');
         $data->description = $request->input('description');
-        $data->image = $request->input('image');
+        if ($request->file('image') != null) {
+            $data->image = Storage::putFile('images', $request->file("image"));
+        }
         $data->type = $request->input('type');
         $data->detail = $request->input('detail');
         $data->status = $request->input('status');
@@ -107,7 +126,7 @@ class ContentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -1,34 +1,84 @@
-<div class="bg-top navbar-light">
-    <div class="container">
-        <div class="row no-gutters d-flex align-items-center align-items-stretch">
-            <div class="col-md-4 d-flex align-items-center py-4">
-                <a class="navbar-brand" href="index.html">Fox. <span>University</span></a>
-            </div>
-            <div class="col-lg-8 d-block">
-                <div class="row d-flex">
-                    <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
-                        <div class="icon d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-                        <div class="text">
-                            <span>Email</span>
-                            <span>youremail@email.com</span>
-                        </div>
-                    </div>
-                    <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
-                        <div class="icon d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-                        <div class="text">
-                            <span>Call</span>
-                            <span>Call Us: + 1235 2355 98</span>
-                        </div>
-                    </div>
-                    <div class="col-md topper d-flex align-items-center justify-content-end">
-                        <p class="mb-0">
-                            <a href="#" class="btn py-2 px-3 btn-primary d-flex align-items-center justify-content-center">
-                                <span>Apply now</span>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<header id="header" class="header-one">
+    <div class="bg-white">
+        <div class="container">
+            <div class="logo-area">
+                <div class="row align-items-center">
+                    <div class="logo col-lg-3 text-center text-lg-left mb-3 mb-md-5 mb-lg-0">
+                        <a class="d-block" href="{{route("root")}}">
+                            <img loading="lazy" src="{{ asset('assets') }}/images/logo.png" alt="Constra">
+                        </a>
+                    </div><!-- logo end -->
+
+                    <div class="col-lg-9 header-right">
+                        <ul class="top-info-box">
+                            <li>
+                                <div class="info-box">
+                                    <div class="info-box-content">
+                                        <p class="info-box-title">Call Us</p>
+                                        <p class="info-box-subtitle"><a
+                                                href="#">{{$setting->phone == null ? "" : $setting->phone}}</a></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="info-box">
+                                    <div class="info-box-content">
+                                        <p class="info-box-title">Email Us</p>
+                                        @if($setting->email != null)
+                                            <p class="info-box-subtitle"><a
+                                                    href="mailto:{{$setting->email}}">{{$setting->email}}</a>
+                                            </p>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </li>
+                            @auth
+                                <li class="last">
+                                    <div class="info-box last">
+                                        <div class="info-box-content">
+                                            <p class="info-box-title">Hello!</p>
+                                            <p class="info-box-subtitle">{{Auth::user()->name}}</p>
+
+                                        </div>
+
+                                    </div>
+                                </li>
+
+                                <li class="header-get-a-quote">
+                                    <div class="nav-item dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Profile <i class="fas fa-user"></i>
+                                        </button>
+                                        <div class="dropdown-menu ramiCustome" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" style="" href="{{route("profile")}}">Manage Profile</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="header-get-a-quote">
+                                    <a class="btn btn-primary" href="{{route("logout")}}">Logout</a>
+
+                                </li>
+
+                            @else
+                                <li class="header-get-a-quote">
+                                    <a class="btn btn-primary" href="{{route("login")}}">LogIn</a>
+                                    <a class="btn btn-primary" href="/register">SignUP</a>
+                                </li>
+
+                            @endauth
+                        </ul><!-- Ul end -->
+                    </div><!-- header right end -->
+                </div><!-- logo area end -->
+
+            </div><!-- Row end -->
+        </div><!-- Container end -->
     </div>
-</div>
+
+@include("home._nav")
+
+<!--/ Navigation end -->
+</header>
+<!--/ Header end -->
