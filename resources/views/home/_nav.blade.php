@@ -26,10 +26,10 @@
                             </li>
                             @foreach ($parentMenus as $parentMenu)
                                 @if (!count($parentMenu->children))
-                                    <li class="nav-item"><a class="nav-link" href="">{{$parentMenu->title}}</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('menucontent',['id' => $parentMenu->id, 'title' => $parentMenu->title])}}">{{$parentMenu->title}}</a></li>
                                 @else
                                     <li class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle"
+                                        <a href="" class="nav-link dropdown-toggle"
                                            data-toggle="dropdown">{{$parentMenu->title}} <i
                                                 class="fa fa-angle-down"></i></a>
                                         <ul class="dropdown-menu" role="menu">
@@ -41,80 +41,7 @@
                                 @endif
 
                             @endforeach
-                            {{--                            <li class="nav-item dropdown">--}}
-                            {{--                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Features <i class="fa fa-angle-down"></i></a>--}}
-                            {{--                                <ul class="dropdown-menu" role="menu">--}}
-                            {{--                                    <li><a href="typography.html">Typography</a></li>--}}
-                            {{--                                    <li><a href="404.html">404</a></li>--}}
-                            {{--                                    <li class="dropdown-submenu">--}}
-                            {{--                                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown">Parent Menu</a>--}}
-                            {{--                                        <ul class="dropdown-menu">--}}
-                            {{--                                            <li><a href="#!">Child Menu 1</a></li>--}}
-                            {{--                                            <li><a href="#!">Child Menu 2</a></li>--}}
-                            {{--                                            <li><a href="#!">Child Menu 3</a></li>--}}
-                            {{--                                        </ul>--}}
-                            {{--                                    </li>--}}
-                            {{--                                </ul>--}}
-                            {{--                            </li>--}}
 
-                            {{--                                                        <li class="nav-item dropdown">--}}
-                            {{--                                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Company <i--}}
-                            {{--                                                                    class="fa fa-angle-down"></i></a>--}}
-                            {{--                                                            <ul class="dropdown-menu" role="menu">--}}
-                            {{--                                                                <li><a href="about.html">About Us</a></li>--}}
-                            {{--                                                                <li><a href="team.html">Our People</a></li>--}}
-                            {{--                                                                <li><a href="testimonials.html">Testimonials</a></li>--}}
-                            {{--                                                                <li><a href="faq.html">Faq</a></li>--}}
-                            {{--                                                                <li><a href="pricing.html">Pricing</a></li>--}}
-                            {{--                                                            </ul>--}}
-                            {{--                                                        </li>--}}
-
-                            {{--                            <li class="nav-item dropdown">--}}
-                            {{--                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <i--}}
-                            {{--                                        class="fa fa-angle-down"></i></a>--}}
-                            {{--                                <ul class="dropdown-menu" role="menu">--}}
-                            {{--                                    <li><a href="projects.html">Projects All</a></li>--}}
-                            {{--                                    <li><a href="projects-single.html">Projects Single</a></li>--}}
-                            {{--                                </ul>--}}
-                            {{--                            </li>--}}
-
-                            {{--                            <li class="nav-item dropdown">--}}
-                            {{--                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Services <i--}}
-                            {{--                                        class="fa fa-angle-down"></i></a>--}}
-                            {{--                                <ul class="dropdown-menu" role="menu">--}}
-                            {{--                                    <li><a href="services.html">Services All</a></li>--}}
-                            {{--                                    <li><a href="service-single.html">Services Single</a></li>--}}
-                            {{--                                </ul>--}}
-                            {{--                            </li>--}}
-
-                            {{--                            <li class="nav-item dropdown">--}}
-                            {{--                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Features <i--}}
-                            {{--                                        class="fa fa-angle-down"></i></a>--}}
-                            {{--                                <ul class="dropdown-menu" role="menu">--}}
-                            {{--                                    <li><a href="typography.html">Typography</a></li>--}}
-                            {{--                                    <li><a href="404.html">404</a></li>--}}
-                            {{--                                    <li class="dropdown-submenu">--}}
-                            {{--                                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown">Parent Menu</a>--}}
-                            {{--                                        <ul class="dropdown-menu">--}}
-                            {{--                                            <li><a href="#!">Child Menu 1</a></li>--}}
-                            {{--                                            <li><a href="#!">Child Menu 2</a></li>--}}
-                            {{--                                            <li><a href="#!">Child Menu 3</a></li>--}}
-                            {{--                                        </ul>--}}
-                            {{--                                    </li>--}}
-                            {{--                                </ul>--}}
-                            {{--                            </li>--}}
-
-                            {{--                            <li class="nav-item dropdown">--}}
-                            {{--                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">News <i--}}
-                            {{--                                        class="fa fa-angle-down"></i></a>--}}
-                            {{--                                <ul class="dropdown-menu" role="menu">--}}
-                            {{--                                    <li><a href="news-left-sidebar.html">News Left Sidebar</a></li>--}}
-                            {{--                                    <li><a href="news-right-sidebar.html">News Right Sidebar</a></li>--}}
-                            {{--                                    <li><a href="news-single.html">News Single</a></li>--}}
-                            {{--                                </ul>--}}
-                            {{--                            </li>--}}
-
-                            {{--                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>--}}
                         </ul>
                     </div>
                 </nav>

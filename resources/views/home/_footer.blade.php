@@ -6,7 +6,7 @@
                     <h3 class="widget-title">About Us</h3>
                     <img loading="lazy" width="200px" class="footer-logo"
                          src="{{ asset('assets') }}/images/footer-logo.png" alt="Constra">
-                    <p>{{$setting->aboutus == null ? '': $setting->aboutus}}.</p>
+                    <p class="white-span">{!! $setting->aboutus !!}</p>
                     <div class="footer-social">
                         <ul>
                             @if($setting->facebook != null)
@@ -70,11 +70,9 @@
                 <div class="col-md-6">
                     <div class="footer-menu text-center text-md-right">
                         <ul class="list-unstyled">
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="team.html">Our people</a></li>
-                            <li><a href="faq.html">Faq</a></li>
-                            <li><a href="news-left-sidebar.html">Blog</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
+                            <li><a href="{{route('about')}}">About</a></li>
+                            <li><a href="{{route('references')}}">References</a></li>
+                            <li><a href="{{route('faq')}}">faq</a></li>
                         </ul>
                     </div>
                 </div>

@@ -53,8 +53,12 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <select class="form-control" name="parent_id">
                                         @foreach($parentMenus as $parent)
+                                            @if ($data->parent_id == 0)
+                                                <option value="0">{{$data->title}}</option>
+                                                @break
+                                            @endif
                                             <option
-                                                value={{$parent->id}} {{($parent->id) == $data->parent_id ? "selected" : ""}}>{{\App\Http\Controllers\admin\MenuController::getParentsTree($parent, $parent->title)}}</option>
+                                                value={{(($parent->id))}} {{($parent->id) == $data->parent_id ? "selected" : ""}}>{{\App\Http\Controllers\admin\MenuController::getParentsTree($parent, $parent->title)}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -64,7 +68,7 @@
                                         class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="first-name"  class="form-control "
+                                    <input type="text" id="first-name" class="form-control "
                                            name="title" value="{{$data->title}}">
                                 </div>
                             </div>
@@ -73,7 +77,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="first-name"  class="form-control "
+                                    <input type="text" id="first-name" class="form-control "
                                            name="keywords" value="{{$data->keywords}}">
                                 </div>
                             </div>
@@ -82,7 +86,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="first-name"  class="form-control "
+                                    <input type="text" id="first-name" class="form-control "
                                            name="description" value="{{$data->description}}">
                                 </div>
                             </div>
@@ -102,8 +106,7 @@
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <button class="btn btn-primary" type="button">Cancel</button>
-                                    <button class="btn btn-primary" type="reset">Reset</button>
+
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>

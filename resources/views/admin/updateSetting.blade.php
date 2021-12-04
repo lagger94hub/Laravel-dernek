@@ -301,7 +301,7 @@
                                                 <textarea id="summernote1" name="aboutus">{{$data->aboutus}}</textarea>
                                                 <script>
                                                     $('#summernote1').summernote({
-                                                        placeholder: 'Hello Bootstrap 4',
+                                                        placeholder: ' About us',
                                                         tabsize: 2,
                                                         height: 100
                                                     });
@@ -318,7 +318,7 @@
                                                           name="references">{{$data->references}}</textarea>
                                                 <script>
                                                     $('#summernote2').summernote({
-                                                        placeholder: 'Hello Bootstrap 4',
+                                                        placeholder: 'references ',
                                                         tabsize: 2,
                                                         height: 100
                                                     });
@@ -335,9 +335,14 @@
                                                     class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="first-name" required="required"
-                                                       class="form-control "
-                                                       name="contact" value="{{$data->contact}}">
+                                                <textarea id="summernote3" name="contact">{{$data->contact}}</textarea>
+                                                <script>
+                                                    $('#summernote3').summernote({
+                                                        placeholder: 'contact',
+                                                        tabsize: 2,
+                                                        height: 100
+                                                    });
+                                                </script>
                                             </div>
                                         </div>
                                     </div>

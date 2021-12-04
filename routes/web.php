@@ -24,6 +24,8 @@ Route::get('/home', function () {
 //route to index page
 Route::get('/', [HomeController::class, 'index'])->name("root");
 Route::get('/contact', [HomeController::class, 'contact'])->name("contact");
+Route::post('/sendmessage', [HomeController::class, 'sendMessage'])->name("message");
+
 Route::get('/faq', [HomeController::class, 'faq'])->name("faq");
 Route::get('/references', [HomeController::class, 'references'])->name("references");
 Route::get('/about', [HomeController::class, 'about'])->name("about");
@@ -31,6 +33,10 @@ Route::get('/logout', [HomeController::class, 'logout'])->name("logout");
 Route::middleware('auth')->group(function() {
     Route::get('/profile', [HomeController::class, 'profile'])->name("profile");
 });
+Route::get('/content/{id}/{title}', [HomeController::class, 'content'])->name("contentVisit");
+Route::get('/menucontent/{id}/{title}', [HomeController::class, 'menuContent'])->name("menucontent");
+
+
 
 
 
@@ -46,6 +52,8 @@ Route::post('/admin/logincheck', [\App\Http\Controllers\admin\HomeController::cl
 // route to logOut
 Route::get('/admin/logout', [\App\Http\Controllers\admin\HomeController::class, 'logOut'])->name("adminLogOut");
 
+
+
 //admin bundle
 Route::middleware('auth')->prefix('admin')->group(function () {
 
@@ -56,7 +64,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('menu/add', [\App\Http\Controllers\admin\MenuController::class, 'add'])->name("menuAdd");
     Route::post('menu/create', [\App\Http\Controllers\admin\MenuController::class, 'create'])->name("menuCreate");
     Route::get('menu/edit/{id}', [\App\Http\Controllers\admin\MenuController::class, 'edit'])->name("menuEdit");
-    Route::post('menu/update{id}', [\App\Http\Controllers\admin\MenuController::class, 'update'])->name("menuUpdate");
+    Route::post('menu/update/{id}', [\App\Http\Controllers\admin\MenuController::class, 'update'])->name("menuUpdate");
     Route::get('menu/delete/{id}', [\App\Http\Controllers\admin\MenuController::class, 'destroy'])->name("menuDelete");
     Route::get('menu/show', [\App\Http\Controllers\admin\MenuController::class, 'show'])->name("menuShow");
 
@@ -66,7 +74,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::get('add', [\App\Http\Controllers\admin\ContentController::class, 'add'])->name("contentAdd");
         Route::post('store', [\App\Http\Controllers\admin\ContentController::class, 'store'])->name("contentStore");
         Route::get('edit/{id}', [\App\Http\Controllers\admin\ContentController::class, 'edit'])->name("contentEdit");
-        Route::post('update{id}', [\App\Http\Controllers\admin\ContentController::class, 'update'])->name("contentUpdate");
+        Route::post('update/{id}', [\App\Http\Controllers\admin\ContentController::class, 'update'])->name("contentUpdate");
         Route::get('delete/{id}', [\App\Http\Controllers\admin\ContentController::class, 'destroy'])->name("contentDelete");
         Route::get('show', [\App\Http\Controllers\admin\ContentController::class, 'show'])->name("contentShow");
     });
@@ -84,6 +92,14 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // admin/setting/update
     Route::post('setting/update/{id}', [\App\Http\Controllers\admin\SettingController::class, 'update'])->name("settingUpdate");
 
+    // admin/message
+    Route::prefix('message')->group(function () {
+    Route::get('/', [\App\Http\Controllers\admin\MessageContorller::class, 'index'])->name("message");
+    Route::get('edit/{id}', [\App\Http\Controllers\admin\MessageContorller::class, 'edit'])->name("messageEdit");
+    Route::post('update/{id}', [\App\Http\Controllers\admin\MessageContorller::class, 'update'])->name("messageUpdate");
+    Route::get('delete/{id}', [\App\Http\Controllers\admin\MessageContorller::class, 'destroy'])->name("messageDelete");
+    Route::get('show', [\App\Http\Controllers\admin\MessageContorller::class, 'show'])->name("messageShow");
+    });
 
 });
 
