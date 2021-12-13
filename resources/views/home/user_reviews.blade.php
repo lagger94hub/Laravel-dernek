@@ -44,7 +44,7 @@
                         <div class="widget">
                             <h3 class="widget-title">User Panel</h3>
                             <ul class="arrow nav nav-tabs">
-                                <li><a href="#">My Profile</a></li>
+                                <li><a href="{{route('profile')}}">My Profile</a></li>
                                 <li><a href="{{route('myreview')}}">My Reviews</a></li>
                                 <li><a href="{{route('logout')}}">Log Out</a></li>
                                 <li><a href="#">Safety</a></li>
@@ -57,7 +57,40 @@
                 </div><!-- Sidebar Col end -->
                 <div class="col-lg-10 mb-5 mb-lg-0 order-0 order-lg-1">
                     <div class="post">
-                        @include('profile.show')
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Subject</th>
+                                <th scope="col">Review</th>
+                                <th scope="col">Rate</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($datalist as $rs)
+                                <tr>
+                                    <td>{{$rs->id}}</td>
+
+                                    <td><a href="{{route('contentVisit', ['id' =>$rs->content->id, 'title' => $rs->content->title])}}"
+                                           target="_blank">{{$rs->content->title}}</a></td>
+
+                                    <td>{{$rs->subject}}</td>
+                                    <td>{{$rs->review}}</td>
+                                    <td>{{$rs->rate}}</td>
+                                    <td>{{$rs->status}}</td>
+                                    <td>{{$rs->created_at}}</td>
+                                    <td><a href="{{route('reviewdelete', ['id' => $rs->id])}}"
+                                           onclick="return confirm('Are you sure you want to delete ?')"><i class="fas fa-trash-alt"></i></a></td>
+
+                                </tr>
+                            @endforeach
+
+
+                            </tbody>
+                        </table>
                     </div><!-- 1st post end -->
 
 

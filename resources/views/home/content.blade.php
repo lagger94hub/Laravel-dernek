@@ -89,6 +89,20 @@
                                     </span>
                                     <span class="post-meta-date"><i
                                             class="far fa-calendar"></i> {{$data->updated_at}}</span>
+                                    @php
+                                     $avrgreview = \App\Http\Controllers\HomeController::avrgreview($data->id);
+                                     $countreview = \App\Http\Controllers\HomeController::countreview($data->id);
+
+                                    @endphp
+                                    <div class="content-rating">
+                                        <i style="color: orange !important;" class="@if($avrgreview<1) far @else fa @endif fa-star"></i>
+                                        <i style="color: orange !important;" class="@if($avrgreview<2) far @else fa @endif fa-star"></i>
+                                        <i style="color: orange !important;" class="@if($avrgreview<3) far @else fa @endif fa-star"></i>
+                                        <i style="color: orange !important;" class="@if($avrgreview<4) far @else fa @endif fa-star"></i>
+                                        <i style="color: orange !important;" class="@if($avrgreview<5) far @else fa @endif fa-star"></i>
+                                        <a href="#rami-rating">{{$countreview}} Review(s) {{$avrgreview}}/ Add review </a>
+
+                                    </div>
 
                                 </div>
                                 <h2 class="entry-title">
@@ -104,11 +118,51 @@
                         </div><!-- post-body end -->
                     </div><!-- post content end -->
 
-
                 </div><!-- Content Col end -->
 
 
+            </div>
+            <div class="row">
+                <div id="rami-rating" class="col-lg-12 mb-5 mb-lg-0">
+                    @livewire('review', ['id' => $data->id])
+                    @livewireScripts
+
+                </div>
             </div><!-- Main row end -->
+
+            <div class="row">
+                <div class="col-lg-12 mb-5 mb-lg-0">
+                    <div id="comments" class="comments-area">
+                        <h3 class="comments-heading">{{$countreview}} Review(s)</h3>
+
+                        <ul class="comments-list">
+                            @foreach($reviews as $review)
+                            <li>
+                                <div class="comment d-flex">
+
+                                    <div class="content-rating" style="margin-right: 10px;">
+                                        <i style="color: orange !important;" class="@if($review->rate<1) far @else fa @endif fa-star"></i>
+                                        <i style="color: orange !important;" class="@if($review->rate<2) far @else fa @endif fa-star"></i>
+                                        <i style="color: orange !important;" class="@if($review->rate<3) far @else fa @endif fa-star"></i>
+                                        <i style="color: orange !important;" class="@if($review->rate<4) far @else fa @endif fa-star"></i>
+                                        <i style="color: orange !important;" class="@if($review->rate<5) far @else fa @endif fa-star"></i>
+                                    </div>
+                                    <div class="comment-body">
+                                        <div class="meta-data">
+                                            <span class="comment-author mr-3">{{$review->user->name}}</span>
+                                            <span class="comment-date float-right">{{$review->created_at}}</span>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>{{$review->review}}</p>
+                                        </div>
+                                    </div>
+                                </div><!-- Comments end -->
+                            </li><!-- Comments-list li end -->
+                            @endforeach
+                        </ul><!-- Comments-list ul end -->
+                    </div>
+                </div>
+                </div>
 
         </div><!-- Conatiner end -->
     </section><!-- Main container end -->

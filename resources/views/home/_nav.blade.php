@@ -51,8 +51,16 @@
         <!--/ Row end -->
 
         <div class="nav-search">
-            <span id="search"><i class="fa fa-search"></i></span>
-        </div><!-- Search end -->
+
+            <form action="{{route('getContent')}}" method='POST' id="my-form">
+                @csrf
+                @livewire('search')
+                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+            </form>
+            @livewireScripts
+
+        </div>
+{{--            <span id="search"><i class="fa fa-search"></i></span>--}}
 
         <div class="search-block" style="display: none;">
             <label for="search-field" class="w-100 mb-0">

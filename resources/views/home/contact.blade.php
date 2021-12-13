@@ -104,6 +104,7 @@
                             <div class="text-right"><br>
                                 <button class="btn btn-primary solid blank" type="submit">Send Message</button>
                             </div>
+                        </div>
                     </form>
                 </div>
 

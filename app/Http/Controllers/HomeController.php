@@ -9,6 +9,8 @@ use App\Models\Setting;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Review;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -18,6 +20,16 @@ class HomeController extends Controller
 //    }
 
 
+    public function listReview()
+    {
+        $datalist = Review::where('user_id', '=', Auth::user()->id)->get();
+        return view('home.user_reviews', ['datalist'=>$datalist]);
+    }
+    public function deleteReview($id)
+    {
+        DB::table('reviews')->where('id', '=', $id)->delete();
+        return redirect()->route('myreview');
+    }
     public static function menuList()
     {
         return Menu::where('parent_id', '=', 0)->where('status', '=', 'true')->with('children')->get();
@@ -25,6 +37,14 @@ class HomeController extends Controller
     public static function getSettings()
     {
         return Setting::first();
+    }
+    public static function countreview($id)
+    {
+        return Review::where('content_id', $id)->count();
+    }
+    public static function avrgreview($id)
+    {
+        return Review::where('content_id', $id)->average('rate');
     }
     public function index()
     {
@@ -93,9 +113,10 @@ class HomeController extends Controller
     public function content($id, $title)
     {
         $data = Content::find($id);
+        $reviews = Review::where('content_id', '=',$id)->where('status', '=', 'true')->get();
         $menu = Menu::find($data->menu_id);
         $images = Image::where('content_id', '=', $id)->get();
-        return view('home.content', ['data' => $data, 'menu' => $menu, 'images' => $images]);
+        return view('home.content', ['data' => $data, 'menu' => $menu, 'images' => $images, 'reviews' => $reviews]);
     }
     public function menucontent($id)
     {
@@ -103,6 +124,27 @@ class HomeController extends Controller
         $menu = Menu::find($id);
         return view('home.menucontent', ['dataList' => $dataList, 'menu' => $menu]);
     }
+    public function getContent(Request $request) {
+        $search = $request->input('search');
+        $count = Content::where('title', 'like', '%'.$search.'%')->get()->count();
+
+        if ($count == 1)
+        {
+            $data = Content::where('title', $request->input('search'))->first();
+            return redirect()->route('contentVisit', ['id'=>$data->id, 'title'=>$data->title]);
+        }
+        else
+        {
+            return redirect()->route('contentList', ['search' =>$search]);
+        }
+
+    }
+    public function contentList($search)
+    {
+        $datalist = Content::where('title', 'like', '%'.$search.'%')->get();
+        return view('home.search_content', ['search' => $search, 'datalist'=>$datalist]);
+    }
+
 
 //    public function subLayout()
 //    {

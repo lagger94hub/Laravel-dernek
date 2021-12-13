@@ -25,6 +25,11 @@
                     <li><a href={{route('message')}}>View Messages</a></li>
                 </ul>
             </li>
+            <li><a><i class="fa fa-comment"></i>Reviews <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href={{route('review')}}>View Reviews</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 

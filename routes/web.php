@@ -35,9 +35,12 @@ Route::middleware('auth')->group(function() {
 });
 Route::get('/content/{id}/{title}', [HomeController::class, 'content'])->name("contentVisit");
 Route::get('/menucontent/{id}/{title}', [HomeController::class, 'menuContent'])->name("menucontent");
+Route::post('/getcontent', [HomeController::class, 'getContent'])->name('getContent');
+Route::get('/contentlist/{search}', [HomeController::class, 'contentList'])->name('contentList');
 
 
-
+Route::get('myreview', [HomeController::class, 'listReview'])->name("myreview");
+Route::get('myreview/delete/{id}', [HomeController::class, 'deleteReview'])->name("reviewdelete");
 
 
 
@@ -99,6 +102,14 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('update/{id}', [\App\Http\Controllers\admin\MessageContorller::class, 'update'])->name("messageUpdate");
     Route::get('delete/{id}', [\App\Http\Controllers\admin\MessageContorller::class, 'destroy'])->name("messageDelete");
     Route::get('show', [\App\Http\Controllers\admin\MessageContorller::class, 'show'])->name("messageShow");
+    });
+
+    // admin/review
+    Route::prefix('review')->group(function () {
+        Route::get('/', [\App\Http\Controllers\admin\ReviewController::class, 'index'])->name("review");
+        Route::get('edit/{id}', [\App\Http\Controllers\admin\ReviewController::class, 'edit'])->name("reviewEdit");
+        Route::post('update/{id}', [\App\Http\Controllers\admin\ReviewController::class, 'update'])->name("reviewUpdate");
+        Route::get('show', [\App\Http\Controllers\admin\ReviewController::class, 'show'])->name("reviewShow");
     });
 
 });
