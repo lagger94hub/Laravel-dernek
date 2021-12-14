@@ -24,7 +24,7 @@ Route::get('/home', function () {
 //route to index page
 Route::get('/', [HomeController::class, 'index'])->name("root");
 Route::get('/contact', [HomeController::class, 'contact'])->name("contact");
-Route::post('/sendmessage', [HomeController::class, 'sendMessage'])->name("message");
+Route::post('/sendmessage', [HomeController::class, 'sendMessage'])->name("homemessage");
 
 Route::get('/faq', [HomeController::class, 'faq'])->name("faq");
 Route::get('/references', [HomeController::class, 'references'])->name("references");

@@ -51,7 +51,7 @@
                     <!-- contact form works with formspree.io  -->
                     <!-- contact form activation doc: https://docs.themefisher.com/constra/contact-form/ -->
                     @include('home._message')
-                    <form id="contact-form" action="{{route('message')}}" method="POST" role="form">
+                    <form id="contact-form" action="{{route('homemessage')}}" method="POST" role="form">
                         @csrf
                         <div class="error-container"></div>
                         <div class="row">

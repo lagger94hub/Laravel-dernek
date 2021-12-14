@@ -715,6 +715,10 @@
             top:2px;
             left:2px;
         }
+        .logo img {
+            width: 200px;
+            height: 200px;
+        }
 
 
     </style>
