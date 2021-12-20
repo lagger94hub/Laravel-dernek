@@ -48,6 +48,9 @@
                                 <li><a href="{{route('myreview')}}">My Reviews</a></li>
                                 <li><a href="{{route('logout')}}">Log Out</a></li>
                                 <li><a href="{{route('user_content')}}">My content</a></li>
+                                <li><a href="{{route('user_payment')}}">My payment</a></li>
+
+
                             </ul>
                         </div><!-- Categories end -->
 
@@ -56,40 +59,49 @@
                 </div><!-- Sidebar Col end -->
                 <div class="col-lg-10 mb-5 mb-lg-0 order-0 order-lg-1">
                     <div class="post">
-                        <table class="table">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Content</th>
-                                <th scope="col">Subject</th>
-                                <th scope="col">Review</th>
-                                <th scope="col">Rate</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($datalist as $rs)
+                        @include('home._message')
+                        <table id="table" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                <a class="btn btn-primary" href="{{route('user_add_content')}}">Add Content</a>
                                 <tr>
-                                    <td>{{$rs->id}}</td>
-
-                                    <td><a href="{{route('contentVisit', ['id' =>$rs->content->id, 'title' => $rs->content->title])}}"
-                                           target="_blank">{{$rs->content->title}}</a></td>
-
-                                    <td>{{$rs->subject}}</td>
-                                    <td>{{$rs->review}}</td>
-                                    <td>{{$rs->rate}}</td>
-                                    <td>{{$rs->status}}</td>
-                                    <td>{{$rs->created_at}}</td>
-                                    <td><a href="{{route('reviewdelete', ['id' => $rs->id])}}"
-                                           onclick="return confirm('Are you sure you want to delete ?')"><i class="fas fa-trash-alt"></i></a></td>
+                                    <th>Menu</th>
+                                    <th>Title</th>
+                                    <th>Keywords</th>
+                                    <th>Description</th>
+                                    <th>image</th>
+                                    <th>Image Gallery</th>
+                                    <th>type</th>
+                                    <th>status</th>
+                                    <th></th>
+                                    <th></th>
 
                                 </tr>
-                            @endforeach
+                                </thead>
 
 
-                            </tbody>
-                        </table>
+                                <tbody>
+                                @foreach($contentData as $item)
+                                    <tr>
+                                        <td>{{\App\Http\Controllers\admin\MenuController::getParentsTree($item->menu, $item->menu->title)}}</td>
+                                        <td>{{$item->title}}</td>
+                                        <td>{{$item->keywords}}</td>
+                                        <td>{{$item->description}}</td>
+                                        <td>
+                                            @if ($item->image)
+                                                <img src="{{Storage::url($item->image)}}" alt="" height="70" width="70">
+                                            @endif
+                                        </td>
+                                        <td><a href="{{route("user_add_image", ['contentId'=>$item->id])}}" onclick="return !window.open(this.href,'','top=50 left=100 width=1000,height=900')"><i class="far fa-images"></i> Add to Gallery</a></td>
+                                        <td>{{$item->type}}</td>
+                                        <td>{{$item->status}}</td>
+                                        <td><a href={{route('user_edit_content', ['id'=>$item->id])}}><i class="fas fa-edit"></i></a></td>
+                                        <td><a onclick="return confirm('Are you sure you want to delete ?')" href={{route('user_delete_content', ['id' => $item->id])}}><i class="fas fa-trash-alt"></i></a></td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                            </table>
+
                     </div><!-- 1st post end -->
 
 

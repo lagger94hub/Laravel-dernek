@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,9 +31,40 @@ Route::get('/faq', [HomeController::class, 'faq'])->name("faq");
 Route::get('/references', [HomeController::class, 'references'])->name("references");
 Route::get('/about', [HomeController::class, 'about'])->name("about");
 Route::get('/logout', [HomeController::class, 'logout'])->name("logout");
-Route::middleware('auth')->group(function() {
+
+
+Route::middleware('auth')->prefix('userislem')->group(function() {
     Route::get('/profile', [HomeController::class, 'profile'])->name("profile");
+    Route::prefix('mycontent')->group(function () {
+        Route::get('/', [ContentController::class, 'index'])->name("user_content");
+        Route::get('add', [ContentController::class, 'add'])->name("user_add_content");
+        Route::post('store', [ContentController::class, 'store'])->name("user_store_content");
+        Route::get('edit/{id}', [ContentController::class, 'edit'])->name("user_edit_content");
+        Route::post('update/{id}', [ContentController::class, 'update'])->name("user_update_content");
+        Route::get('delete/{id}', [ContentController::class, 'destroy'])->name("user_delete_content");
+        Route::get('show', [ContentController::class, 'show'])->name("user_show_content");
+    });
+
+    Route::prefix('image')->group(function () {
+        Route::get('create/{contentId}', [\App\Http\Controllers\ImageController::class, 'create'])->name("user_add_image");
+        Route::post('store/{contentId}', [\App\Http\Controllers\ImageController::class, 'store'])->name("user_store_image");
+        Route::get('delete/{imageId}/{contentId}', [\App\Http\Controllers\ImageController::class, 'destroy'])->name("user_delete_image");
+        Route::get('show', [\App\Http\Controllers\ImageController::class, 'show'])->name("user_show_image");
+    });
+    Route::prefix('payment')->group(function () {
+        Route::get('/', [\App\Http\Controllers\PaymentController::class, 'index'])->name("user_payment");
+        Route::get('create/{contentId}', [\App\Http\Controllers\PaymentController::class, 'create'])->name("user_create_payment");
+        Route::post('store', [\App\Http\Controllers\PaymentController::class, 'store'])->name("user_store_payment");
+        Route::get('edit/{id}', [\App\Http\Controllers\PaymentController::class, 'edit'])->name("user_edit_payment");
+        Route::post('update/{id}', [\App\Http\Controllers\PaymentController::class, 'update'])->name("user_update_payment");
+        Route::get('delete/{id}', [\App\Http\Controllers\PaymentController::class, 'destroy'])->name("user_delete_payment");
+        Route::get('show', [\App\Http\Controllers\PaymentController::class, 'show'])->name("user_show_payment");
+    });
+
 });
+
+
+
 Route::get('/content/{id}/{title}', [HomeController::class, 'content'])->name("contentVisit");
 Route::get('/menucontent/{id}/{title}', [HomeController::class, 'menuContent'])->name("menucontent");
 Route::post('/getcontent', [HomeController::class, 'getContent'])->name('getContent');
@@ -111,7 +143,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::post('update/{id}', [\App\Http\Controllers\admin\ReviewController::class, 'update'])->name("reviewUpdate");
         Route::get('show', [\App\Http\Controllers\admin\ReviewController::class, 'show'])->name("reviewShow");
     });
-
+    //admin/faq
+    Route::prefix('faq')->group(function () {
+        Route::get('/', [\App\Http\Controllers\admin\FaqController::class, 'index'])->name("admin_faq");
+        Route::get('add', [\App\Http\Controllers\admin\FaqController::class, 'create'])->name("admin_faq_add");
+        Route::post('store', [\App\Http\Controllers\admin\FaqController::class, 'store'])->name("admin_faq_store");
+        Route::get('edit/{id}', [\App\Http\Controllers\admin\FaqController::class, 'edit'])->name("admin_faq_edit");
+        Route::post('update/{id}', [\App\Http\Controllers\admin\FaqController::class, 'update'])->name("admin_faq_update");
+        Route::get('delete/{id}', [\App\Http\Controllers\admin\FaqController::class, 'destroy'])->name("admin_faq_delete");
+        Route::get('show', [\App\Http\Controllers\admin\FaqController::class, 'show'])->name("admin_faq_show");
+    });
 });
 
 //route to homewithcontrol with url parameters , controller is used
@@ -120,6 +161,10 @@ Route::get('/homewithcontrol/{id}/{name}', [HomeController::class, 'indexPara'])
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+
+
 
 //Route::get('/', function () {
 //    return view('welcome') ->name('welcome');

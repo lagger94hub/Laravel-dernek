@@ -30,6 +30,13 @@
                     <li><a href={{route('review')}}>View Reviews</a></li>
                 </ul>
             </li>
+            <li><a><i class="fa fa-question-circle"></i>Faqs <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href={{route('admin_faq')}}>View Faqs</a></li>
+                    <li><a href={{route('admin_faq_add')}}>Add Faq</a></li>
+
+                </ul>
+            </li>
         </ul>
     </div>
 

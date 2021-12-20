@@ -48,6 +48,8 @@
                                 <li><a href="{{route('myreview')}}">My Reviews</a></li>
                                 <li><a href="{{route('logout')}}">Log Out</a></li>
                                 <li><a href="{{route('user_content')}}">My content</a></li>
+                                <li><a href="{{route('user_payment')}}">My payment</a></li>
+
                             </ul>
                         </div><!-- Categories end -->
 
@@ -56,7 +58,34 @@
                 </div><!-- Sidebar Col end -->
                 <div class="col-lg-10 mb-5 mb-lg-0 order-0 order-lg-1">
                     <div class="post">
-                        @include('profile.show')
+                        @include('home._message')
+                        <table id="table" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>Content ID</th>
+                                    <th>Paid Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th></th>
+
+                                </tr>
+                                </thead>
+
+
+                                <tbody>
+                                @foreach($payments as $payment)
+                                    <tr>
+                                        <td>{{$payment->user->name}}</td>
+                                        <td>{{$payment->content_id}}</td>
+                                        <td>{{$payment->payment}}</td>
+                                        <td>{{$payment->created_at}}</td>
+                                        <td>{{$payment->status}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+
                     </div><!-- 1st post end -->
 
 

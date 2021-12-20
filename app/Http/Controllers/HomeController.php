@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Faq;
 use App\Models\Image;
 use App\Models\Menu;
 use App\Models\Setting;
@@ -68,8 +69,8 @@ class HomeController extends Controller
     }
     public function faq()
     {
-
-        return view('home.faq');
+        $dataList = Faq::all()->sortBy('position');
+        return view('home.faq', ['dataList' => $dataList]);
     }
     public function references()
     {
