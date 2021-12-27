@@ -1,6 +1,9 @@
 <div class="profile clearfix">
     <div class="profile_pic">
-        <img src="{{ asset('assets') }}/admin/images/img.jpg" alt="..." class="img-circle profile_img">
+
+        @if (Auth::user()->profile_photo_path)
+            <img src="{{Storage::url(Auth::user()->profile_photo_path)}}" alt="..." class="img-circle profile_img" style="padding: 1px">
+        @endif
     </div>
     <div class="profile_info">
         @auth

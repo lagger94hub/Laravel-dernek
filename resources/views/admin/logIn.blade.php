@@ -29,6 +29,7 @@
 
     <div class="login_wrapper">
         <div class="animate form login_form">
+
             <section class="login_content">
                 <form action={{route('logInCheck')}} method='POST'>
                     @CSRF
@@ -45,6 +46,8 @@
                     </div>
 
                     <div class="clearfix"></div>
+                    @include('home._message')
+
 
                     <div class="separator">
                         <p class="change_link">New to site?

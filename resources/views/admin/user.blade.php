@@ -1,13 +1,13 @@
 @extends('layouts.adminLayout')
 
-@section('title', 'admin panel Messages page')
+@section('title', 'admin panel User page')
 
 @section('content')
     <div class="right_col" role="main">
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Messages Page</h3>
+                    <h3>Users Page</h3>
                 </div>
 
 
@@ -19,7 +19,7 @@
                 <div class="col-md-12 col-sm-12  ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Messages Page</h2>
+                            <h2>Users Page</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -44,38 +44,47 @@
                                     <tr>
 
                                         <th>ID</th>
-                                        <th>User Name</th>
-                                        <th>Content</th>
-                                        <th>Subject</th>
-                                        <th>Review</th>
-                                        <th>Rate</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
-                                        <th></th>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Roles</th>
+
+
                                         <th></th>
                                     </tr>
                                     </thead>
 
 
                                     <tbody>
-                                    @foreach($dataList as $item)
+                                    @foreach($datalist as $item)
                                         <tr>
                                             <td>{{$item->id}}</td>
-                                            <td><a onclick="return !window.open(this.href,'','top=50 left=100 width=1000,height=900')"
-                                                    href="{{route('admin_show_user', ['id' => $item->user->id])}}">{{$item->user->name}}</a></td>
 
-                                            <td><a href="{{route('contentVisit', ['id' =>$item->content->id, 'title' => $item->content->title])}}"
-                                                   target="_blank">{{$item->content->title}}</a></td>
-
-                                            <td>{{$item->subject}}</td>
-                                            <td>{{$item->review}}</td>
-                                            <td>{{$item->rate}}</td>
-                                            <td>{{$item->status}}</td>
-                                            <td>{{$item->created_at}}</td>
                                             <td>
+                                                @if($item->profile_photo_path)
+                                                    <img src="{{Storage::url($item->profile_photo_path)}}" height="50px" width="50px" alt="">
+                                                @endif
+                                            </td>
+
+
+                                            <td>{{$item->name}}</td>
+                                            <td>{{$item->email}}</td>
+                                            <td>{{$item->phone}}</td>
+                                            <td>{{$item->address}}</td>
+                                            <td>
+                                                @foreach($item->roles as $role)
+                                                    {{$role->name}} &comma;
+                                                @endforeach
                                                 <a onclick="return !window.open(this.href,'','top=50 left=100 width=1000,height=900')"
-                                                   href={{route('reviewEdit', ['id'=>$item->id])}} ><i
+                                                       href={{route('admin_user_roles', ['id'=>$item->id])}} ><i
+                                                            class="fa fa-plus-circle"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href={{route('admin_edit_user', ['id'=>$item->id])}} ><i
                                                         class="fas fa-edit"></i></a></td>
+
 
                                         </tr>
                                     @endforeach

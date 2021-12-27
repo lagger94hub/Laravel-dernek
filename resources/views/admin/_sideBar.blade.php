@@ -37,6 +37,20 @@
 
                 </ul>
             </li>
+            <li><a><i class="fa fa-dollar-sign"></i>Payments <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href={{route('admin_payment')}}>All Payments</a></li>
+{{--                    <li><a href={{route('admin_faq_add')}}>Add Faq</a></li>--}}
+
+                </ul>
+            </li>
+            <li><a><i class="fa fa-user"></i>Users <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href={{route('admin_user')}}>Show Users</a></li>
+                    {{--                    <li><a href={{route('admin_faq_add')}}>Add Faq</a></li>--}}
+
+                </ul>
+            </li>
         </ul>
     </div>
 

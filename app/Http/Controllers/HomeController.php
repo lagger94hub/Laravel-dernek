@@ -6,6 +6,7 @@ use App\Models\Content;
 use App\Models\Faq;
 use App\Models\Image;
 use App\Models\Menu;
+use App\Models\Profile;
 use App\Models\Setting;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -49,10 +50,10 @@ class HomeController extends Controller
     }
     public function index()
     {
-        $slider = Content::select('id', 'title', 'image', 'description')->limit(4)->get();
-        $top = Content::select('id', 'title', 'image', 'description')->inRandomOrder()->limit(4)->get();
-        $recent = Content::select('id', 'title', 'image', 'description')->orderByDesc('id')->limit(4)->get();
-        $interesting = Content::select('id', 'title', 'image', 'description')->inRandomOrder()->limit(4)->get();
+        $slider = Content::select('id', 'title', 'image', 'description')->where('status', '=', 'True')->limit(4)->get();
+        $top = Content::select('id', 'title', 'image', 'description')->where('status', '=', 'True')->inRandomOrder()->limit(4)->get();
+        $recent = Content::select('id', 'title', 'image', 'description')->where('status', '=', 'True')->orderByDesc('id')->limit(4)->get();
+        $interesting = Content::select('id', 'title', 'image', 'description')->where('status', '=', 'True')->inRandomOrder()->limit(4)->get();
 
 
 
@@ -147,10 +148,11 @@ class HomeController extends Controller
     }
 
 
-//    public function subLayout()
-//    {
-//        return view('home.sub_layout');
-//    }
+    public function ownerProfile($id)
+    {
+        $owner = Profile::where('user_id', '=', $id)->get();
+        return view('home.owner_profile', ['owner' => $owner]);
+    }
 
 
 

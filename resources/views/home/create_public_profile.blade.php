@@ -50,74 +50,34 @@
                 <div class="col-lg-2 order-1 order-lg-0">
 
                     @include('home._sideProfile')
-
                 </div><!-- Sidebar Col end -->
                 <div class="col-lg-10 mb-5 mb-lg-0 order-0 order-lg-1">
                     <div class="post">
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post"  enctype="multipart/form-data" action={{route('user_update_content', ['id'=> $data->id])}} >
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post"  enctype="multipart/form-data" action={{route('store_public_profile')}} >
                             @CSRF
+
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align">Main Menu <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control" name="menu_id">
-                                        @foreach($menus as $menu)
-                                            <option value={{$menu->id}} {{($menu->id) == $data->menu_id ? "selected" : ""}}>{{\App\Http\Controllers\admin\MenuController::getParentsTree($menu, $menu->title)}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Title <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="first-name"  class="form-control " name="title" value="{{$data->title}}">
-                                </div>
-                            </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Keywords <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="first-name"  class="form-control " name="keywords" value="{{$data->keywords}}">
-                                </div>
-                            </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">description <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="first-name"  class="form-control " name="description" value="{{$data->description}}">
-                                </div>
-                            </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Image <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="file" id="image" class="form-control " name="image">
-                                    @if ($data->image)
-                                        <img src="{{Storage::url($data->image)}}" alt="" height="60" width="60">
-                                    @endif
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Type <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Address <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="first-name" class="form-control " name="type" value="{{$data->type}}">
+                                    <input type="text" id="first-name"  class="form-control " name="address">
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Detail <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Phone <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <textarea id="summernote" name="detail">{{$data->detail}}</textarea>
-                                    <script>
-                                        $('#summernote').summernote({
-                                            placeholder: 'Hello Bootstrap 4',
-                                            tabsize: 2,
-                                            height: 100
-                                        });
-                                    </script>
+                                    <input type="text" id="first-name"  class="form-control " name="phone">
                                 </div>
                             </div>
+
 
 
 

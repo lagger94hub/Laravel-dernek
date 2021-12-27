@@ -49,22 +49,7 @@
 
                 <div class="col-lg-2 order-1 order-lg-0">
 
-                    <div class="sidebar sidebar-left">
-
-                        <div class="widget">
-                            <h3 class="widget-title">User Panel</h3>
-                            <ul class="arrow nav nav-tabs">
-                                <li><a href="#">My Profile</a></li>
-                                <li><a href="{{route('myreview')}}">My Reviews</a></li>
-                                <li><a href="{{route('logout')}}">Log Out</a></li>
-                                <li><a href="{{route('user_content')}}">My content</a></li>
-                                <li><a href="{{route('user_payment')}}">My payment</a></li>
-
-                            </ul>
-                        </div><!-- Categories end -->
-
-
-                    </div><!-- Sidebar end -->
+                    @include('home._sideProfile')
                 </div><!-- Sidebar Col end -->
                 <div class="col-lg-10 mb-5 mb-lg-0 order-0 order-lg-1">
                     <div class="post">

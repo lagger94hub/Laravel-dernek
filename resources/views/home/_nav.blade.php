@@ -15,15 +15,7 @@
 
                     <div id="navbar-collapse" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item dropdown"><a class="nav-link" href="{{route("root")}}"
-                                                             data-toggle="dropdown">Home<i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{route("references")}}">References</a></li>
-                                    <li><a href="{{route("faq")}}">FAQ</a></li>
-                                    <li><a href="{{route("contact")}}">Contact</a></li>
-                                    <li><a href="{{route("about")}}">About Us</a></li>
-                                </ul>
-                            </li>
+
                             @foreach ($parentMenus as $parentMenu)
                                 @if (!count($parentMenu->children))
                                     <li class="nav-item"><a class="nav-link" href="{{route('menucontent',['id' => $parentMenu->id, 'title' => $parentMenu->title])}}">{{$parentMenu->title}}</a></li>
@@ -41,6 +33,13 @@
                                 @endif
 
                             @endforeach
+
+                            <li class="nav-item"><a class='nav-link' href="{{route("references")}}">References</a></li>
+                            <li class="nav-item"><a class='nav-link' href="{{route("faq")}}">FAQ</a></li>
+                            <li class="nav-item"><a class='nav-link' href="{{route("contact")}}">Contact</a></li>
+                            <li class="nav-item"><a class='nav-link' href="{{route("about")}}">About Us</a></li>
+
+
 
                         </ul>
                     </div>

@@ -89,6 +89,10 @@
                                     </span>
                                     <span class="post-meta-date"><i
                                             class="far fa-calendar"></i> {{$data->updated_at}}</span>
+                                    <span class="post-meta-date"><i
+                                            class="far fa-calendar"></i> <a
+                                            onclick="return !window.open(this.href,'','top=50 left=100 width=1000,height=900')"
+                                            href="{{route('owner_profile', ['id' => $data->user_id])}}">Post Owner</a></span>
                                     @php
                                      $avrgreview = \App\Http\Controllers\HomeController::avrgreview($data->id);
                                      $countreview = \App\Http\Controllers\HomeController::countreview($data->id);
@@ -149,7 +153,8 @@
                                     </div>
                                     <div class="comment-body">
                                         <div class="meta-data">
-                                            <span class="comment-author mr-3">{{$review->user->name}}</span>
+                                            <a href="{{route('owner_profile', ['id' => $review->user_id])}}"><span class="comment-author mr-3">{{$review->user->name}}</span></a>
+
                                             <span class="comment-date float-right">{{$review->created_at}}</span>
                                         </div>
                                         <div class="comment-content">

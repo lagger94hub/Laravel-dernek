@@ -39,23 +39,8 @@
 
                 <div class="col-lg-2 order-1 order-lg-0">
 
-                    <div class="sidebar sidebar-left">
+                    @include('home._sideProfile')
 
-                        <div class="widget">
-                            <h3 class="widget-title">User Panel</h3>
-                            <ul class="arrow nav nav-tabs">
-                                <li><a href="#">My Profile</a></li>
-                                <li><a href="{{route('myreview')}}">My Reviews</a></li>
-                                <li><a href="{{route('logout')}}">Log Out</a></li>
-                                <li><a href="{{route('user_content')}}">My content</a></li>
-                                <li><a href="{{route('user_payment')}}">My payment</a></li>
-
-
-                            </ul>
-                        </div><!-- Categories end -->
-
-
-                    </div><!-- Sidebar end -->
                 </div><!-- Sidebar Col end -->
                 <div class="col-lg-10 mb-5 mb-lg-0 order-0 order-lg-1">
                     <div class="post">
@@ -93,7 +78,16 @@
                                         </td>
                                         <td><a href="{{route("user_add_image", ['contentId'=>$item->id])}}" onclick="return !window.open(this.href,'','top=50 left=100 width=1000,height=900')"><i class="far fa-images"></i> Add to Gallery</a></td>
                                         <td>{{$item->type}}</td>
-                                        <td>{{$item->status}}</td>
+                                        @if($item->status == 'False')
+                                            <td>
+                                                <a class="btn btn-primary" href="{{route('user_create_payment', ['contentId' => $item->id])}}">Pay to post</a>
+                                            </td>
+                                        @else
+                                            <td>
+                                                Paid
+                                            </td>
+                                        @endif
+
                                         <td><a href={{route('user_edit_content', ['id'=>$item->id])}}><i class="fas fa-edit"></i></a></td>
                                         <td><a onclick="return confirm('Are you sure you want to delete ?')" href={{route('user_delete_content', ['id' => $item->id])}}><i class="fas fa-trash-alt"></i></a></td>
                                     </tr>
